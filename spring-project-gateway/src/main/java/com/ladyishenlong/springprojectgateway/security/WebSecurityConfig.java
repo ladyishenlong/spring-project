@@ -1,6 +1,8 @@
-package com.ladyishenlong.springprojectgateway.filter;
+package com.ladyishenlong.springprojectgateway.security;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.Authentication;
@@ -15,19 +17,12 @@ public class WebSecurityConfig {
     @Bean
     public SecurityWebFilterChain webFilterChain(ServerHttpSecurity httpSecurity) {
         return httpSecurity.authorizeExchange()
-                .pathMatchers("/hello").permitAll()
-                .pathMatchers("/hello2").hasRole("admin")
-                .anyExchange().permitAll()
-                .and().formLogin()
-                .authenticationSuccessHandler(new ServerAuthenticationSuccessHandler() {
-                    @Override
-                    public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
-                        return null;
-                    }
-                })
-                .and().cors().and()
+//                .pathMatchers("/hello").permitAll()
+                .anyExchange().authenticated()
+                .and()
                 .httpBasic().and()
-                .csrf().disable()
+                .formLogin().and()//默认的登录页面
+//                .loginPage("/loginPage")//自定义登录页面
                 .build();
     }
 

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 网关
  * 路由默认都是get请求
+ *
+ * todo 了解下文件上传下载
  */
 @RestController
 public class GateWayConfig {

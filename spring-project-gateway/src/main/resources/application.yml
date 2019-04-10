@@ -7,11 +7,11 @@
 spring:
   application:
     name: spring-project-gateway
-  security:
-    user:
-      name: name
-      password: 123456
-      roles: admin
+#  security:
+#    user:
+#      name: name
+#      password: 123123
+#      roles: admin
 
 server:
   port: 10000

@@ -5,6 +5,8 @@ import feign.Body;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Slf4j
 @RestController
 public class HelloController {
@@ -27,5 +29,10 @@ public class HelloController {
         return helloModel;
     }
 
+
+    @GetMapping("/hello4")
+    public String hello4(HttpServletRequest request){
+        return "请求头为："+request.getHeader("hello");
+    }
 
 }

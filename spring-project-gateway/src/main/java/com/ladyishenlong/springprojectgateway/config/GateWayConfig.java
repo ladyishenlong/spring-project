@@ -1,5 +1,6 @@
 package com.ladyishenlong.springprojectgateway.config;
 
+import com.ladyishenlong.springprojectgateway.filter.TestFilter;
 import com.ladyishenlong.springprojectgateway.model.HelloModel;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -32,6 +33,11 @@ public class GateWayConfig {
                     return true;
                 }).and().path("/hello3")
                         .uri("http://localhost:10001/hello3"))
+
+                //todo 添加请求头
+                .route(r -> r.path("/hello4")
+                        .uri("http://localhost:10001/hello4"))
+
                 .build();
     }
 

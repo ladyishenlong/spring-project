@@ -1,0 +1,25 @@
+#spring.application.name=spring-project-gateway
+#server.port=10000
+#eureka.client.serviceUrl.defaultZone=http://localhost:20000/eureka/
+
+
+
+spring:
+  application:
+    name: spring-project-gateway
+  security:
+    user:
+      name: name
+      password: 123456
+      roles: admin
+
+server:
+  port: 10000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka/
+
+
+

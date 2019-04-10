@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * 这里可以进行添加请求头等操作
+ * 局部过滤器，可以单独用于某次请求
  */
 @Slf4j
 @Component

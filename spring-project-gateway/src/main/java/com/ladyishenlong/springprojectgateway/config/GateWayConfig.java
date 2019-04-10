@@ -20,26 +20,22 @@ public class GateWayConfig {
         return builder.routes()
 
                 //普通get请求
-                .route(r -> r.path("/hello")
-                        .uri("http://localhost:10001/hello"))
+                .route(r -> r.path("/hello").uri("http://localhost:10001/hello"))
 
                 //参数名为value的get请求
-                .route(r -> r.path("/hello2")
-                        .and().query("value")
+                .route(r -> r.path("/hello2").and().query("value")
                         .uri("http://localhost:10001/hello2"))
 
                 //post请求，传入body
-                .route(r -> r.readBody(HelloModel.class, body -> {
-                    return true;
-                }).and().path("/hello3")
+                .route(r -> r.readBody(HelloModel.class, body -> true).and()
+                        .path("/hello3")
                         .uri("http://localhost:10001/hello3"))
 
-                //todo 添加请求头
+                //拥有请求头的请求
                 .route(r -> r.path("/hello4")
-                        .filters(f -> f.filter(new TestFilter())
-                                .addRequestHeader("hello",
-                                        "head_hello"))//增加请求头
+                        .filters(f -> f.filter(new TestFilter()).addRequestHeader("hello", "head_hello"))//额外增加请求头
                         .uri("http://localhost:10001/hello4"))
+
                 .build();
     }
 

@@ -36,8 +36,10 @@ public class GateWayConfig {
 
                 //todo 添加请求头
                 .route(r -> r.path("/hello4")
+                        .filters(f -> f.filter(new TestFilter())
+                                .addRequestHeader("hello",
+                                        "head_hello"))//增加请求头
                         .uri("http://localhost:10001/hello4"))
-
                 .build();
     }
 

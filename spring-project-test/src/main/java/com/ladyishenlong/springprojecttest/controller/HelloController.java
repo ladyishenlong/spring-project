@@ -32,7 +32,7 @@ public class HelloController {
 
     @GetMapping("/hello4")
     public String hello4(HttpServletRequest request){
-        return "请求头为："+request.getHeader("hello");
+        return "请求头为："+request.getHeader("test");
     }
 
 }

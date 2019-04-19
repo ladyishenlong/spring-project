@@ -67,23 +67,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.ladyishenlong.springprojecttest.SpringProjectTestApplication</mainClass>
+                </configuration>
+
             </plugin>
 
             <!-- Docker maven plugin -->
             <plugin>
                 <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>1.0.0</version>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.8</version>
                 <configuration>
-                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                    <dockerDirectory>src/main/docker</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
+                    <repository>myorg/${project.artifactId}</repository>
                 </configuration>
             </plugin>
             <!-- Docker maven plugin -->

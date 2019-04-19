@@ -1,4 +1,4 @@
-package com.ladyishenlong.springprojectgateway.config;
+package com.ladyishenlong.springprojectgateway.controller;
 
 import com.ladyishenlong.springprojectgateway.filter.TestFilter;
 import com.ladyishenlong.springprojectgateway.model.HelloModel;
@@ -7,6 +7,7 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
 
 /**
  * 网关
@@ -14,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * todo 了解下文件上传下载
  */
+
 @RestController
-public class GateWayConfig {
+public class HelloController {
 
     @Bean
     public RouteLocator router(RouteLocatorBuilder builder) {

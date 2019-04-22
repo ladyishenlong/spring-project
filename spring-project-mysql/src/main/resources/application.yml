@@ -1,0 +1,20 @@
+
+spring:
+  application:
+    name: spring-project-mysql
+  datasource:
+    url: jdbc:mysql://localhost:33306/student  #连接student数据库
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true #控制台打印log
+
+
+server:
+  port: 10002
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka/

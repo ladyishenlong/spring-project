@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: spring-project-mysql
@@ -11,6 +10,15 @@ spring:
     show-sql: true #控制台打印log
 
 
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #配置项：开启下划线到驼峰的自动转换. 作用：将数据库字段根据驼峰规则自动注入到对象属性。
+
+logging:
+  level:
+    com.hehe.mapper: debug #打印SQL信息
+
+
 server:
   port: 10002
 
@@ -18,3 +26,4 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:20000/eureka/
+

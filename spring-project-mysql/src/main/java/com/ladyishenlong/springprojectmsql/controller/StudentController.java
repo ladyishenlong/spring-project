@@ -2,6 +2,8 @@ package com.ladyishenlong.springprojectmsql.controller;
 
 import com.ladyishenlong.springprojectmsql.jpa.StudentRepository;
 import com.ladyishenlong.springprojectmsql.model.Student;
+import com.ladyishenlong.springprojectmsql.mybatis.StudentMapper;
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +20,25 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
-    @GetMapping("/getAllStudent")
-    public Mono getAllStudent() {
+    @Autowired
+    private StudentMapper studentMapper;
+
+    @GetMapping("/getAllStudentByJpa")
+    public Mono getAllStudentByJpa() {
         return Mono.just(studentRepository.findAll());
     }
+
+
+    @GetMapping("/getAllStudentByMyBatis")
+    public Mono getAllStudentByMyBatis() {
+        return Mono.just(studentMapper.findAll());
+    }
+
+//    参数填入路径
+//    @GetMapping("get/{username}/{password}")
+//    public User get(@PathVariable("username") String username, @PathVariable("password") String password) {
+//        return userMapper.get(username, password);
+//    }
 
 
 }

@@ -33,3 +33,11 @@ select * from student.student where name in ('阿尔托莉雅','宫本武藏')
 #between
 select * from student.student where age between 0 and 100;
 select * from student.student where age not between 0 and 100;
+
+#SQL Alias 别名
+select a.name,a.age from student.student as a ;
+
+
+#join 两行表联合
+select * from student.student as a,student.stage as b where a.stage=b.id;
+

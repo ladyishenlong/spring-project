@@ -1,0 +1,35 @@
+# 查询语句
+select * from student.student; #查询语句
+select NAME from student.student;
+select * from student.student order by age;#按照年龄从小到大排序
+select * from student.student order by age desc ;#按照年龄从大到小排序
+select * from student.student where age=3000 and name ='斯卡哈';
+
+#增加
+insert into student.student (name, age) values ('宫本武藏',19);
+
+#更新
+update student.student set name ='开膛手杰克' where name='杰克';
+
+#删除
+delete from student.student where name='杂鱼';
+delete from student.student;#删除所有行
+
+#top
+select * from student.student limit 2
+
+
+%	替代一个或多个字符
+_	仅替代一个字符
+[charlist]	字符列中的任何单一字符[^charlist]或者[!charlist] 不在字符列中的任何单一字符
+
+#like %作为通配符
+select * from student.student where name like '阿%';
+select * from student.student where name not like '阿%';
+
+#in
+select * from student.student where name in ('阿尔托莉雅','宫本武藏')
+
+#between
+select * from student.student where age between 0 and 100;
+select * from student.student where age not between 0 and 100;

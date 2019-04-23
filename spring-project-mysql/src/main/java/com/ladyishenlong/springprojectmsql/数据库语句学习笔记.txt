@@ -1,3 +1,5 @@
+## 参考网站  http://www.w3school.com.cn/sql/sql_create_index.asp
+
 # 查询语句
 select * from student.student; #查询语句
 select NAME from student.student;
@@ -40,4 +42,41 @@ select a.name,a.age from student.student as a ;
 
 #join 两行表联合
 select * from student.student as a,student.stage as b where a.stage=b.id;
+
+
+#内联 INNER JOIN 与 JOIN 是相同的
+select name,stage_name from student.student
+inner join student.stage where student.id=stage.id;
+
+#LEFT JOIN 关键字会从左表那里返回所有的行，
+#即使在右表中没有匹配的行,没有匹配的是null
+select name,stage_name from student.student left join student.stage
+on student.stage=stage.id
+
+
+# RIGHT JOIN 关键字会右表 (table_name2) 那里返回所有的行，
+# 即使在左表 (table_name1) 中没有匹配的行。
+select name,stage_name from  student.student right join student.stage
+on stage.id=student.stage;
+
+
+#UNION 以及 UNION ALL（允许重复的值）有相同数量的列，列也必须拥有相似的数据类型
+select name from student.student
+union all
+select stage_name from student.stage
+
+
+#创建索引  unique 表示唯一
+create unique index stageId on student.stage (id)
+
+
+
+
+
+
+
+
+
+
+
 

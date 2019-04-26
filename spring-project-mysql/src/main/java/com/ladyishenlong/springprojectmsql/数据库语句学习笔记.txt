@@ -71,6 +71,29 @@ create unique index stageId on student.stage (id)
 
 
 
+#将insert 和 update 一起使用的sql
+merge into xt_dbys_rf
+using (select *from dual) #这里是语法需要添加的第二张表
+on (scbh = :scbh and xmh = :xmh and glbh = :glbh)
+when not matched then
+  insert (scbh, xmh, ysr, rfjh, glbh, yssl, ysgg, yssj, scrq, scrq2)
+  values (:scbh, :xmh, :ysr, :rfjh, :glbh, :yssl, :ysgg, :yssj, :scrq, :scrq2)
+when matched then update
+  set ysr=:ysr,
+      rfjh= :rfjh,
+      yssl= :yssl,
+      ysgg= :ysgg,
+      yssj= :yssj,
+      scrq= :scrq,
+      scrq2= :scrq2;
+
+#删除某列的索引
+drop index stageId on student.stage;
+#删除列
+alter table student.student drop column name;
+#添加列
+alter table student.student add baoju varchar(20);
+
 
 
 

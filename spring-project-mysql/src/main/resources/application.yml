@@ -1,3 +1,5 @@
+
+#该项目的mySql数据库，放在本地的docker之中
 spring:
   application:
     name: spring-project-mysql

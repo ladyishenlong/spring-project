@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 参考 https://www.cnblogs.com/garfieldcgf/p/6510762.html
+ *
+ * redis 存储数据 key-value的形式
  */
 @RestController
 @RequestMapping("/redis")

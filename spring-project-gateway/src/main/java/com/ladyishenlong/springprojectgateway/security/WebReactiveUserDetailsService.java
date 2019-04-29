@@ -35,8 +35,6 @@ public class WebReactiveUserDetailsService implements ReactiveUserDetailsService
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 //        com.jokerchen.reactiveWeb.entity.User defUser = userService.findUserByUsername(username);
 
-        //todo 尝试使用redis 以及 mongodb来提高速度
-
 
         //从数据库查询用户信息
         UserModel userModel = sqlClient.findByUsername(username);

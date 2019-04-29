@@ -22,6 +22,7 @@ public class WebSecurityConfig {
         return httpSecurity.authorizeExchange()
                 .pathMatchers("/hello").hasRole("user")
 //                .pathMatchers("/hello").permitAll()
+                .pathMatchers("/swagger*//**").permitAll()
                 .anyExchange()
                 .authenticated()
                 .and()

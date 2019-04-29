@@ -11,4 +11,6 @@ public interface HelloClient {
     @GetMapping("/hello")//远程的地址
     String hello();
 
+
+
 }

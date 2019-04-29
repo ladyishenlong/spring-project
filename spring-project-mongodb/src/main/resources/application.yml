@@ -3,7 +3,7 @@ spring:
     name: spring-project-mongodb
   data:
     mongodb: # 配置参考 https://www.jianshu.com/p/3a8c1904e807
-      uri: mongodb://localhost:27017/admin
+      uri: mongodb://localhost:27017/admin #admin是数据库名，不是工程名
       username: user
       password: 123456
 

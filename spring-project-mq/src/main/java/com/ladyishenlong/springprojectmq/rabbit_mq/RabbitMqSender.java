@@ -1,6 +1,7 @@
 package com.ladyishenlong.springprojectmq.rabbit_mq;
 
 
+import com.ladyishenlong.springprojectmq.rabbit_mq.ack.AckSenderService;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,12 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 单条消息发送给单个队列，该队列只有一个消费者
+ * 主要参考 https://www.cnblogs.com/kingsonfu/p/10599608.html
  */
 @RestController
 public class RabbitMqSender {
 
     @Autowired
     private AmqpTemplate amqpTemplate;
+
+    @Autowired
+    private AckSenderService ackSenderService;
+
 
     @GetMapping("/oneToOne")
     public void oneToOne() {
@@ -32,7 +38,7 @@ public class RabbitMqSender {
     public void oneToMore1() {
         //多条消息给同一个队列，消费者有多个，每个消息被消费一次，多个消费者循环处理
         for (int i = 0; i < 10; i++) {
-            amqpTemplate.convertAndSend("kinson", "这是我发送的消息"+i);
+            amqpTemplate.convertAndSend("kinson", "这是我发送的消息" + i);
         }
     }
 
@@ -40,9 +46,14 @@ public class RabbitMqSender {
     public void oneToMore2() {
         //同一个生产者发送给多个消费者，同样的消息两边都会处理
         for (int i = 0; i < 10; i++) {
-            amqpTemplate.convertAndSend("kinson", "这是我发送的消息"+i);
-            amqpTemplate.convertAndSend("kinson2", "这是我发送的消息"+i);
+            amqpTemplate.convertAndSend("kinson", "这是我发送的消息" + i);
+            amqpTemplate.convertAndSend("kinson2", "这是我发送的消息" + i);
         }
+    }
+
+    @GetMapping("/ack")
+    public void ack() {
+        ackSenderService.send();
     }
 
 }

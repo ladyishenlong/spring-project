@@ -1,4 +1,4 @@
-package com.ladyishenlong.springprojectthymeleaf;
+package com.ladyishenlong.springprojectthymeleaf.controller;
 
 
 import org.springframework.stereotype.Controller;

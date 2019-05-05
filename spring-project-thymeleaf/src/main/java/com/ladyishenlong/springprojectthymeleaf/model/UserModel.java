@@ -1,4 +1,4 @@
-package com.ladyishenlong.springprojectthymeleaf;
+package com.ladyishenlong.springprojectthymeleaf.model;
 
 import lombok.Data;
 

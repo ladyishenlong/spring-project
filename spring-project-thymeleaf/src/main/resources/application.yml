@@ -7,7 +7,13 @@ spring:
     encoding: UTF-8
     servlet:
       content-type: text/html
-    prefix: classpath:/templates/  #默认路径位置
+    prefix: classpath:/templates  #默认路径位置
+
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
 
 
 eureka:

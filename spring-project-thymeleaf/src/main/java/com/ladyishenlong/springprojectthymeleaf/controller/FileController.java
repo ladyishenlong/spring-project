@@ -7,8 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -61,6 +61,12 @@ public class FileController {
     }
 
 
+    /**
+     * 多个文件的上传
+     *
+     * @param request
+     * @return
+     */
     @PostMapping("/multiFileUpLoad")
     @ResponseBody
     public String multiFileUpLoad(HttpServletRequest request) {
@@ -95,6 +101,54 @@ public class FileController {
             }
         }
         return "true";
+    }
+
+
+    @GetMapping("/download")
+    public String downLoad(HttpServletResponse response) throws UnsupportedEncodingException {
+        String filename = "冰公主 国王 梦想 鬼刀4k壁纸_彼岸图网.jpg";
+        String filePath = "/Users/ruanchenhao/WorkSpace/FileLoad";
+
+        File file = new File(filePath + "/" + filename);
+        if (!file.exists()) {
+            log.info("{}不存在", filename);
+        } else {
+            response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("Content-Disposition", "attachment;fileName=" +
+                    java.net.URLEncoder.encode(filename, "UTF-8"));
+
+            byte[] buffer = new byte[1024];
+            FileInputStream fis = null;//文件输入流
+            BufferedInputStream bis = null;
+            OutputStream os = null;//输出流
+
+            try {
+                os = response.getOutputStream();//获取输出流
+
+                fis = new FileInputStream(file);
+                bis = new BufferedInputStream(fis);
+
+                int i = bis.read(buffer);
+                while (-1 != i) {
+                    os.write(buffer);
+                    i = bis.read(buffer);
+                }
+
+            } catch (Exception e) {
+                log.info("文件下载异常：{}", e.getMessage());
+                e.printStackTrace();
+            }
+
+
+            try {
+                bis.close();
+                fis.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 

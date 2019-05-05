@@ -1,0 +1,36 @@
+<!DOCTYPE>
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Thymeleaf</title>
+</head>
+
+
+<body>
+<div>
+    <span>访问 Model：</span><span th:text="${user}"></span>
+</div>
+<div>
+    <span>访问列表</span>
+    <table>
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${list}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.userName}"></td>
+            <td th:text="${item.age}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+
+</html>

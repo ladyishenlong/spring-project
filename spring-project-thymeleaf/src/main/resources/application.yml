@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: spring-project-thymeleaf
+  thymeleaf:
+    cache: false #停用换缓存，方便查查看实时页面
+    mode: LEGACYHTML5 #非严格的html
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    prefix: classpath:/templates/  #默认路径位置
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka/
+server:
+  port: 10007

@@ -1,13 +1,14 @@
 package com.ladyishenlong.springprojectgateway.controller;
 
-import com.ladyishenlong.springprojectgateway.filter.TestFilter;
+import com.ladyishenlong.springprojectgateway.filter.HelloFilter;
+import com.ladyishenlong.springprojectgateway.filter.TestGatewayFilter;
 import com.ladyishenlong.springprojectgateway.model.HelloModel;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
 
 /**
  * 网关
@@ -37,11 +38,20 @@ public class HelloController {
 
                 //拥有请求头的请求
                 .route(r -> r.path("/hello4")
-                        .filters(f -> f.filter(new TestFilter()).addRequestHeader("hello", "head_hello"))//额外增加请求头
+                        .filters(f -> f.filter(new HelloFilter()).addRequestHeader("hello", "head_hello"))//额外增加请求头
                         .uri("http://localhost:10001/hello4"))
+
+
+                //使用模板做测试
+                .route(r -> r.path("/thTest/test")
+                        .filters(f->f.filter(new TestGatewayFilter())
+                                .addRequestHeader("test","this is test add request header"))
+                        .uri("http://localhost:10007/thTest/test"))
+
 
                 .build();
     }
+
 
 
 }

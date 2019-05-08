@@ -28,13 +28,11 @@ public class WebReactiveUserDetailsService implements ReactiveUserDetailsService
 
     @Override
     public Mono<UserDetails> findByUsername(String username) {
-
-        log.info("用户名：" + username);
+        log.info("----登录用户名：{}----",username);
 
         //spring security提供的默认的加密方式
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 //        com.jokerchen.reactiveWeb.entity.User defUser = userService.findUserByUsername(username);
-
 
         //从数据库查询用户信息
         UserModel userModel = sqlClient.findByUsername(username);

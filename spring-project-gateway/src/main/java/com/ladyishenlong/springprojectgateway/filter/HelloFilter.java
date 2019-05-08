@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
  */
 @Slf4j
 @Component
-public class TestFilter implements GatewayFilter, Ordered {
+public class HelloFilter implements GatewayFilter, Ordered {
 
     private static final String TEST_HEADER = "test";
 

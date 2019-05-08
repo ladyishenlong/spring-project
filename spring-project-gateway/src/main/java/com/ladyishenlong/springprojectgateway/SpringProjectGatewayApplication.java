@@ -9,7 +9,8 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
-
+//配置session存储后立刻刷新设置刷新模式为立刻刷新，否则可能获取不到session
+//@EnableRedisHttpSession(redisFlushMode = RedisFlushMode.IMMEDIATE)
 @EnableFeignClients
 @EnableDiscoveryClient
 @EnableEurekaClient

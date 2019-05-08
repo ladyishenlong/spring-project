@@ -20,6 +20,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityWebFilterChain webFilterChain(ServerHttpSecurity httpSecurity) {
         return httpSecurity.authorizeExchange()
+//                .pathMatchers("/thTest/test")
                 .pathMatchers("/hello").hasRole("user")
 //                .pathMatchers("/hello").permitAll()
                 .pathMatchers("/swagger*//**").permitAll()

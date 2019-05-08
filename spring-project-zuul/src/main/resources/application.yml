@@ -1,0 +1,50 @@
+#尝试使用zuul作为网关，不集成webflux
+
+spring:
+  application:
+    name: spring-project-zuul
+#  redis:
+#    database: 0 #redis索引
+#    host: localhost #redis服务器地址
+#    port: 6379 #端口号
+#    password:  #链接密码
+#    timeout: 3000 #超时时间（毫秒）
+#    jedis:
+#      pool:
+#        max-active: 200 #最大连接数
+#        max-wait: -1 #最大阻塞等待时间
+#        max-idle: 10 #最大空闲时间
+#        min-idle: 0 #最小空闲时间
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka/
+server:
+  port: 10010
+
+
+#zuul 网关路由代理
+#=参考 https://blog.csdn.net/s573626822/article/details/83180567
+zuul:
+  ignored-services: "*"
+  ignored-headers:  #全局忽略请求头
+
+  routes:
+
+    hello: #可自定义名称
+      path: /hello/**
+      url: http://localhost:10001/ #可以是地址
+
+    test:
+      path: /test/**
+      sensitiveHeaders: test #能够过滤请求头，不传入下游
+      serviceId: spring-project-test  #可以是eureka上注册的name
+
+
+
+
+
+
+
+

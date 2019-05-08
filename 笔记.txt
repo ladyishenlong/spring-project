@@ -1,1 +1,2 @@
 1. spring-project 开头的都是学习记录
+2. 集群 ajax 等东西需要学习

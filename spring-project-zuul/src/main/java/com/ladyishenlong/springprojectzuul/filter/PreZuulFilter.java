@@ -65,23 +65,26 @@ public class PreZuulFilter extends ZuulFilter {
         log.info("请求地址：{}", url);
 
 
-
-
-
         //从security之中取出用户信息
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            log.info("----有用户----");
-            Object principal = auth.getPrincipal();
-            if (principal instanceof UserDetails) {
-                //获得用户名，放入请求头之中，传给其他服务用户信息
-                log.info ("用户1：{}",((UserDetails) principal).getUsername());
-            }
+        if(auth!=null){
+            log.info("----登录的用户名：{}----",auth.getName());
+            requestContext.addZuulRequestHeader("username",auth.getName());
+        }
 
-            if (principal instanceof Principal) {
-                log.info ("用户2：{}",((Principal) principal).getName());
-            }
-        } else log.info("----没有用户----");
+        //以下是来获取更多信息
+//        if (auth != null) {
+//            log.info("----有用户：{}----", auth.getName());
+//            Object principal = auth.getPrincipal();
+//            if (principal instanceof UserDetails) {
+//                //获得用户名，放入请求头之中，传给其他服务用户信息
+//                log.info("用户1：{}", ((UserDetails) principal).getUsername());
+//            }
+//
+//            if (principal instanceof Principal) {
+//                log.info("用户2：{}", ((Principal) principal).getName());
+//            }
+//        } else log.info("----没有用户----");
 
 
         return null;

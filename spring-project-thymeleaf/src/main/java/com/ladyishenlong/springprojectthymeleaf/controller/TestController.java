@@ -11,35 +11,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
+/**
+ * 这个controller 主要是与 zuul 的网关进行交互
+ */
 @Slf4j
 @Controller
 @RequestMapping("/thTest")
 public class TestController {
 
 
+
     @GetMapping("/test")
-    public String test(HttpServletRequest request, Model model){
+    public String test(HttpServletRequest request, Model model) {
 
         //获取请求头
-        String testHead= request.getHeader("test");
-        log.info("----得到自定义加入的请求头：{}----",testHead);
+        String testHead = request.getHeader("test");
+        log.info("----得到自定义加入的请求头：{}----", testHead);
         model.addAttribute("test", testHead);
 
-//        Principal principal = request.getUserPrincipal();
-//        if(principal!=null){
-//            log.info("----登陆的用户信息：{}----",principal.getName());
-//        }
-
-
-
-
-//        model.addAttribute("username", request.getHeader("username"));
-
-
+        String username = request.getHeader("username");
+        log.info("----登录用户{}----", username);
+        model.addAttribute("username", username);
 
         return "/test";//模板页面路径
     }
-
 
 
 }

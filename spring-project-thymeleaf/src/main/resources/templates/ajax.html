@@ -1,0 +1,65 @@
+<!DOCTYPE >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax 测试使用</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+
+        function hello() {
+            alert("hello ajax")
+        }
+
+        function ajaxGet() {
+            console.log("开始ajax 请求");
+            $.ajax({
+                type: "GET",
+                url: "/ajax/getAjax",
+                data: {value:"this is value"}, //向后台传送的数据
+                success: function (data) {
+                    //data 是请求获得的数据
+                    alert("ajax请求成功："+data)
+                },
+                error: function (error) {
+                    console.log("发生了错误"+error)
+                }
+            })
+        }
+
+        let postData ={
+            'id':144,
+            'userName':"saber",
+            'age':15
+        };
+
+        function ajaxPost() {
+            console.log("开始 ajax post 请求")
+            $.ajax({
+                type: "POST",
+                url: "/ajax/postAjax",
+                contentType:"application/json;charset=UTF-8",
+                dataType : 'json', //返回值类型
+                data: JSON.stringify(postData), //向后台传送的数据
+                success: function (data) {
+                    //data 是请求获得的数据
+                    alert("ajax请求成功："+JSON.stringify(data))
+                },
+                error: function (error) {
+                    console.log("发生了错误"+error.toString())
+                }
+            })
+        }
+
+
+
+    </script>
+</head>
+<body>
+
+<input type="button" value="点击进行get请求" id="btn" onclick="ajaxGet()"/>
+<input type="button" value="点击进行post请求" id="btn2" onclick="ajaxPost()"/>
+
+
+</body>
+</html>

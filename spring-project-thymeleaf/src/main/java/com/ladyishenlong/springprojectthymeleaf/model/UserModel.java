@@ -2,8 +2,11 @@ package com.ladyishenlong.springprojectthymeleaf.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class UserModel {
+public class UserModel implements Serializable {
+
     private Long id;
     private String userName;
     private int age;

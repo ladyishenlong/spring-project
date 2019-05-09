@@ -6,7 +6,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 @Configuration
 @EnableWebSecurity
@@ -30,4 +32,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and().logout().logoutSuccessUrl("/sign_in").permitAll()
                 .and().csrf().disable();
     }
+
+
+//    @Bean
+    public RememberMeServices rememberMeServices() {
+        SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
+
+        //设置1000秒后过期
+        rememberMeServices.setValiditySeconds(1000);
+        return rememberMeServices;
+    }
+
 }

@@ -4,9 +4,14 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Slf4j
 @Component
@@ -51,9 +56,34 @@ public class PreZuulFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
-        HttpServletRequest request = RequestContext.getCurrentContext().getRequest();
+        RequestContext requestContext = RequestContext.getCurrentContext();
+        //添加请求头
+        requestContext.addZuulRequestHeader("test", "zuul test header");
+
+        HttpServletRequest request = requestContext.getRequest();
         StringBuffer url = request.getRequestURL();
         log.info("请求地址：{}", url);
+
+
+
+
+
+        //从security之中取出用户信息
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            log.info("----有用户----");
+            Object principal = auth.getPrincipal();
+            if (principal instanceof UserDetails) {
+                //获得用户名，放入请求头之中，传给其他服务用户信息
+                log.info ("用户1：{}",((UserDetails) principal).getUsername());
+            }
+
+            if (principal instanceof Principal) {
+                log.info ("用户2：{}",((Principal) principal).getName());
+            }
+        } else log.info("----没有用户----");
+
+
         return null;
     }
 

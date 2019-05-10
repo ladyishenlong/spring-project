@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * todo 还需要了解下集群
+ * 数据库事务
  */
 //@EnableAdminServer
 @EnableEurekaServer

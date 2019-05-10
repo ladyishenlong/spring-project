@@ -1,5 +1,6 @@
 package com.ladyishenlong.springprojectzuul.filter;
 
+import com.google.common.util.concurrent.RateLimiter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -54,6 +55,15 @@ public class PreZuulFilter extends ZuulFilter {
         return true;
     }
 
+
+
+
+
+
+
+
+
+
     @Override
     public Object run() throws ZuulException {
         RequestContext requestContext = RequestContext.getCurrentContext();
@@ -85,6 +95,8 @@ public class PreZuulFilter extends ZuulFilter {
 //                log.info("用户2：{}", ((Principal) principal).getName());
 //            }
 //        } else log.info("----没有用户----");
+
+
 
 
         return null;

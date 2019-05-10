@@ -1,7 +1,17 @@
 
+body{
+    text-align: center;
+}
+
 h1 {
     color: darkgray;
     text-align: center;
+}
+
+
+#btn_addList{
+    text-align: center;
+    margin-top: 30px;
 }
 
 button {
@@ -9,3 +19,5 @@ button {
     align-items: center;
     size: 50px;
 }
+
+

@@ -1,0 +1,45 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>javaScript 测试学习页面</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <!--springboot引入方式需要变化,去掉路径最前面的static 引入成功-->
+    <!--springboot  资源路径默认有static -->
+    <script type="text/javascript" src="/js/js_demo.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/css_demo.css">
+</head>
+<body>
+
+<h1 id="title">这是一个没有什么意思的标题</h1>
+
+<div>
+    <button id="btn_getData" onclick="hello()">点击获取数据</button>
+    <p id="p_showData"></p>
+
+    <button id="btn_requestData" onclick="getAjaxData('这是请求参数')">点击请求数据</button>
+</div>
+
+<div>
+    <h2>显示list</h2>
+    <button id="btn_addOne" onclick="addOneData()">列表添加单个数据</button>
+    <button id="btn_addList" onclick="addListData()">列表添加多个数据</button>
+
+    <table>
+        <thead>
+        <tr>
+            <th>名字</th>
+            <th>宝具</th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        <!--在这里添加数据-->
+
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

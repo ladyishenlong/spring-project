@@ -18,6 +18,8 @@ import java.io.InputStream;
 public class DemoFallbackProvider implements FallbackProvider {
 
     //所有的路由都加熔断器,如果只对eureka-client 服务生效，此处可替换为“eureka-client”
+    //实现对producer-server服务的熔断 只需要添加服务名字
+
     @Override
     public String getRoute() {
         return "*";

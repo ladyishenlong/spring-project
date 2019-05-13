@@ -59,7 +59,7 @@ public class PreZuulFilter extends ZuulFilter {
 
 
     @Override
-    public Object run() throws ZuulException {
+    public Object run()  {
         RequestContext requestContext = RequestContext.getCurrentContext();
         //添加请求头
         requestContext.addZuulRequestHeader("test", "zuul test header");

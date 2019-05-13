@@ -23,6 +23,7 @@ public class ApiAccessFilter implements Filter {
         long start = System.currentTimeMillis(); // 请求进入时间
 
         filterChain.doFilter(servletRequest, servletResponse);
+
         log.info("{} 请求耗时：{}", request.getRequestURL(),
                 System.currentTimeMillis() - start);
     }

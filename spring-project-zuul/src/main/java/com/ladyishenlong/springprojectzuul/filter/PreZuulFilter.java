@@ -5,6 +5,7 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.security.Principal;
 
 @Slf4j
@@ -56,14 +58,6 @@ public class PreZuulFilter extends ZuulFilter {
     }
 
 
-
-
-
-
-
-
-
-
     @Override
     public Object run() throws ZuulException {
         RequestContext requestContext = RequestContext.getCurrentContext();
@@ -77,9 +71,9 @@ public class PreZuulFilter extends ZuulFilter {
 
         //从security之中取出用户信息
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth!=null){
-            log.info("----登录的用户名：{}----",auth.getName());
-            requestContext.addZuulRequestHeader("username",auth.getName());
+        if (auth != null) {
+            log.info("----登录的用户名：{}----", auth.getName());
+            requestContext.addZuulRequestHeader("username", auth.getName());
         }
 
         //以下是来获取更多信息
@@ -97,7 +91,18 @@ public class PreZuulFilter extends ZuulFilter {
 //        } else log.info("----没有用户----");
 
 
-
+        //要求请求的需要token
+        String token = request.getParameter("token");
+        if (StringUtils.isEmpty(token)) {
+            log.info("没有token");
+            requestContext.setSendZuulResponse(false);
+            requestContext.setResponseStatusCode(401);
+            try {
+                requestContext.getResponse().getWriter().write("token is empty！");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         return null;
     }

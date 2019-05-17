@@ -2,21 +2,25 @@
 
 server:
   port: 10010
-#  servlet:
-#    session:
-#      persistent: true
-#      timeout: 7d
+  servlet:
+    session:
+      persistent: true
+      timeout: 36000  #session 过期时间
 #      cookie:
 #        max-age: 7d
 spring:
-#  session:
-#    store-type: redis
+  session:
+    store-type: redis
+    redis:
+      namespace: spring:session
+      flush-mode: immediate
   application:
     name: spring-project-zuul
   redis:
     host: localhost #redis服务器地址
     port: 6379 #端口号
     database: 1
+    timeout: 36000 #redis 过期时间
 
 eureka:
   client:
@@ -37,6 +41,7 @@ zuul:
     hello: #可自定义名称
       path: /hello/**
       url: http://localhost:10001/ #可以是地址
+
 
     test:
       path: /test/**

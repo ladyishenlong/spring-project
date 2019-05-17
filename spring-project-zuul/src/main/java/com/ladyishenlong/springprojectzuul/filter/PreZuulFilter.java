@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
 
@@ -67,6 +69,7 @@ public class PreZuulFilter extends ZuulFilter {
         HttpServletRequest request = requestContext.getRequest();
         StringBuffer url = request.getRequestURL();
         log.info("请求地址：{}", url);
+        log.info("HttpServletRequest session  {} ",request.getSession().getId());
 
 
         //从security之中取出用户信息
@@ -75,6 +78,30 @@ public class PreZuulFilter extends ZuulFilter {
             log.info("----登录的用户名：{}----", auth.getName());
             requestContext.addZuulRequestHeader("username", auth.getName());
         }
+
+
+        //session 可以在session之中放入username
+        HttpSession httpSession= request.getSession();
+        if(httpSession!=null){
+            log.info("----获得session {} ---",httpSession.getId());
+        }
+
+        httpSession.setAttribute("username",auth.getName());
+        log.info("用户名:{}",httpSession.getAttribute("username"));
+
+
+
+        Cookie[] cookies= request.getCookies();
+        if(cookies!=null&&cookies.length>0){
+            for (Cookie cookie : cookies) {
+                log.info("----cookie {}----",cookie.getValue());
+            }
+        }
+
+
+
+
+
 
         //以下是来获取更多信息
 //        if (auth != null) {
@@ -91,18 +118,24 @@ public class PreZuulFilter extends ZuulFilter {
 //        } else log.info("----没有用户----");
 
 
-        //要求请求的需要token
-        String token = request.getParameter("token");
-        if (StringUtils.isEmpty(token)) {
-            log.info("没有token");
-            requestContext.setSendZuulResponse(false);
-            requestContext.setResponseStatusCode(401);
-            try {
-                requestContext.getResponse().getWriter().write("token is empty！");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
+
+
+        //设置要求请求的需要token
+//        String token = request.getParameter("token");
+//        if (StringUtils.isEmpty(token)) {
+//            log.info("没有token");
+//            requestContext.setSendZuulResponse(false);
+//            requestContext.setResponseStatusCode(401);
+//            try {
+//                requestContext.getResponse().getWriter().write("token is empty！");
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+
+
 
         return null;
     }

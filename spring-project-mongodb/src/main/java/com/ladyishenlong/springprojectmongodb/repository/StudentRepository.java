@@ -13,6 +13,4 @@ public interface StudentRepository extends MongoRepository<StudentModel, Integer
 
 
 
-
-
 }
